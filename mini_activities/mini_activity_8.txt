@@ -9,9 +9,9 @@ if grade >= 80:
     get ice cream
 
 if grade < 80:
-    remove all belongings from room
+    remove belongings from room
     if room == empty:
-        remove chid from house
+        remove child from house
 
 #Task 4
 if birthday == dad:
