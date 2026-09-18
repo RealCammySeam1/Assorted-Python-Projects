@@ -113,7 +113,10 @@ if check > 0:
 # =========================================================
 # (Write your Python code here)
 
+age = float(input("Enter your age: "))
+student = str(input("Are you a student? (y/n)"))
 
+studentLower = student.lower
 
 # =========================================================
 # TASK 3: Amusement Park Ride Eligibility Checker
