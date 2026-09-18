@@ -15,11 +15,11 @@ display the result of the division
 # Write the pseudo-code and draw the flowchart for getting a mark from the user.  The computer system will display an A, if the mark is greater than or equal to 80%.  Otherwise, if the mark is greater than or equal to 70%, the computer system will display a B.  Otherwise, the computer system will display “satisfactory.”
 ask user for their grade
 
-**if** mark >= 80, **then:**
+**if** mark is greater than or equal to 80, **then:**
     display "A"
 
-**elif** mark >= 70, **then:**
+**elif** mark greater than or equal to 70, **then:**
     display "B"
 
-**else:**
+**else**
     display "statisfactory."
