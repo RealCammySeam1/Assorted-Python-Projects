@@ -42,6 +42,7 @@ and I have not plagiarized or copied code from others or AI sources.
 # =========================================================
 # (Write your Python code here)
 
+"""
 import sys
 
 print(
@@ -88,6 +89,7 @@ if check == 0:
 
 if check > 0:
     print(f"Enjoy your item! Your change is ${check:.2}")
+"""
 
 # =========================================================
 # TASK 2: Movie Ticket Price Calculator
@@ -117,6 +119,22 @@ age = float(input("Enter your age: "))
 student = str(input("Are you a student? (y/n)"))
 
 studentLower = student.lower
+
+price = 0
+
+if age < 12:
+    price == 8.00
+elif age >= 12 and age <= 17:
+    price == 10.00
+elif age >= 18 and age <= 64:
+    price == 12
+elif age >= 65:
+    price == 6
+
+if studentLower == "y":
+    price -= 2
+
+print(f"The total price is: ${price}")
 
 # =========================================================
 # TASK 3: Amusement Park Ride Eligibility Checker
