@@ -42,6 +42,7 @@ and I have not plagiarized or copied code from others or AI sources.
 # =========================================================
 # (Write your Python code here)
 
+"""
 import sys
 
 print(
@@ -88,6 +89,7 @@ if check == 0:
 
 if check > 0:
     print(f"Enjoy your item! Your change is ${check:.2}")
+"""
 
 # =========================================================
 # TASK 2: Movie Ticket Price Calculator
@@ -120,13 +122,17 @@ if check > 0:
 # (Write your Python code here)
 
 """
+### Get inputs
 age = float(input("Enter your age: "))
 student = input("Are you a student? (y/n) ")
 
+### Convert to all lowercase
 studentLower = student.lower()
 
+### Create price variable to be modified
 price = 0
 
+### Set the price from input
 if age < 12:
     price += 8.00
 elif age >= 12 and age <= 17:
@@ -136,9 +142,11 @@ elif age >= 18 and age <= 64:
 elif age >= 65:
     price += 6
 
+### Student discount
 if studentLower == "y":
     price -= 2
 
+### Display the total
 print(f"The total price is: ${price}")
 """
 
@@ -164,6 +172,15 @@ print(f"The total price is: ${price}")
 #
 # Pseudocode:
 # (Write your pseudocode here as comments)
+# 
+# Ask user to input their height
+# Ask user to input their age
+# Ask if user is accompanied by an adult
+# If height is less than 120cm, display, "Denied: You do not meet the height requirement."
+# If height is greater than or equal to 140cm AND age is greater than or equal to 12, display, "Approved: You can ride alone! Ticket price: $15"
+# If height is greater than or equal to 120 cm AND less than or equal to 139cm OR age is less than 12, then check adult accompaniment
+#      If accompanied, then display, "Approved: You can ride with an adult! Ticket price: $10"
+#      Else, display, "Denied: You need an adult with you to ride."
 #
 # Flowchart:
 # (Attach separately as a PDF document)
@@ -172,8 +189,23 @@ print(f"The total price is: ${price}")
 # =========================================================
 # (Write your Python code here)
 
+"""
+### Get input
+height = float(input("Input your height (cm): "))
+age = int(input("Input your age: "))
+accompanied = str(input("Are you accompanied by an adult (y/n)?"))
 
-
+### Display approval/denial and price based on age and height
+if height < 120:
+    print("Denied. You do not meet the height requirement.")
+elif height >= 140 and age > 12:
+    print("Approved: You can ride alone! Ticket price: $15")
+elif height >= 120 and height <= 139:
+    if accompanied.lower() == y:
+        print("Approved: You can ride with an adult! Ticket price: $10")
+    else:
+        print("Denied: You need an adult with you to ride.")
+"""
 
 # =========================================================
 # TASK 4: Bank Loan & Interest Rate Screener NO PSEUDO CODE OR FLOW CHART NEEDED!
@@ -210,3 +242,16 @@ print(f"The total price is: ${price}")
 # Python Code:
 # =========================================================
 # (Write your Python code here)
+
+import sys
+
+anIncome = float(input("Enter your annual income ($): "))
+creditScore = float(input("Enter your credit score: "))
+existingDebt = float(input("Enter your debt amount ($): "))
+loanTerm = float(input("Enter your preferred loan term (y): "))
+
+if anIncome >= 45000:
+    
+
+if anIncome < 45000:
+    sys.exit
