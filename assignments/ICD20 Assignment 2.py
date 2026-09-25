@@ -43,8 +43,6 @@ and I have not plagiarized or copied code from others or AI sources.
 # (Write your Python code here)
 
 """
-import sys
-
 print(
     "Pricing: \n"
     "1: Chips - $2.00\n"
@@ -76,7 +74,6 @@ elif foodChoice == 3:
 
 else:
     print("Invalid choice.")
-    sys.exit()
 
 moneyIn = float(input("Enter money : $"))
 check = moneyIn - totalPrice
@@ -243,15 +240,46 @@ elif height >= 120 and height <= 139:
 # =========================================================
 # (Write your Python code here)
 
-import sys
-
+### Get inputs
 anIncome = float(input("Enter your annual income ($): "))
 creditScore = float(input("Enter your credit score: "))
 existingDebt = float(input("Enter your debt amount ($): "))
-loanTerm = float(input("Enter your preferred loan term (y): "))
+loanTerm = float(input("Enter your preferred loan term (15 or 30 years): "))
 
-if anIncome >= 45000:
-    
+rate = 0
 
-if anIncome < 45000:
-    sys.exit
+if anIncome >= 45000 or existingDebt < 0 and creditScore >= 620:
+    if anIncome > 100000 and existingDebt < 5000:
+        rate - 0.5
+
+    if creditScore < 750 or existingDebt >= 10000:
+        if loanTerm == 15:
+            rate = 6.0
+            accept = True
+        elif loanTerm == 30:
+            rate = 6.5
+            accept = True
+        else:
+            print("Error: Invalid term duration.")
+            accept = False
+
+    elif creditScore >= 750 or existingDebt < 10000:
+        if loanTerm == 15:
+            rate = 4.5
+            accept = True
+        elif loanTerm == 30:
+            rate = 5.0
+            accept = True
+        else:
+            print("Error: Invalid term duration.")
+            accept = False
+
+    if anIncome > 100000 and existingDebt < 5000:
+        rate -= 0.5
+
+    if accept == True:
+        print(f"Loan approved! Your intrest rate is {rate}%")
+
+elif anIncome < 45000:
+    print("Loan denied: High risk applicant.")
+
