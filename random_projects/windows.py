@@ -5,6 +5,8 @@ import time
 
 increase = 1
 num = 0
+global num
+num = 0
 
 root = tk.Tk()
 
@@ -15,18 +17,21 @@ def addNum():
     print(num)
 
 def increaseSum():
-    global num
-    global increase
-    increase += 1
-    num -= 10
-    print("Subtracted 10")
-    print(num)
+    if num >= 10:
+        num
+        global increase
+        increase += 1
+        num -= 10
+        print("Subtracted 10")
+        print(num)
+    else:
+        print("Not enough points!")
 
 main = Tk()
     
 button = tk.Button(
     text="+1",
-    width=25,
+    width=35,
     height=5,
     command=addNum
 ).pack()
