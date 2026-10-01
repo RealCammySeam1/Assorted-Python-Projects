@@ -16,6 +16,7 @@ gameRunning = True
 systemHealth = 1000
 enemyHealth = 500
 
+### Introduction
 def introArt():
     print("████████╗██╗  ██╗███████╗    ███████╗ ██████╗  █████╗ ███╗   ██╗██████╗")
     print("╚══██╔══╝██║  ██║██╔════╝    ██╔════╝ ██╔══██╗██╔══██╗████╗  ██║██╔══██╗")
@@ -39,6 +40,7 @@ def intro():
     print("You must go through the file system and remove any and all issues.")
     print("")
 
+### Options for successfull and unsuccessfull attacks for both delete and kill attacks
 def optionDeleteSucceed():
     enemyHealth -= 200
     print("You sucessfully removed the malicious program!")
@@ -55,6 +57,10 @@ def optionKillFail():
     systemHealth -= 150
     print("The virus has set itself to automatically start on boot! Killing the task does not resolve the issue.")
 
+### Create a function to simplify the printing of enemy and player health
+def printHealths():
+    print(f"System health: {systemHealth}/1000")
+    print(f"Enemy health : {enemyHealth}/500")
 
 introArt()
 intro()
@@ -91,4 +97,5 @@ while gameRunning == True:
 
         else:
             print("You entered the directory wrong!")
+            printHealths()
             systemHealth -= 50
