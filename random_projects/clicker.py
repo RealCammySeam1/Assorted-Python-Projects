@@ -5,7 +5,7 @@ import sys
 root = tk.Tk()
 
 ### Variables
-num = 1000
+num = 10000000
 increase = 1
 upgrade1Cost = 10
 upgrade2Cost = 1000
