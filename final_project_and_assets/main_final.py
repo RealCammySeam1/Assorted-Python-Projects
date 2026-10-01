@@ -60,7 +60,7 @@ introArt()
 intro()
 
 enemyDirectories = ["/home/user/documents", "/mnt/executor", "/tmp"]
-attackOptionsDelete =
+attackOptionsDelete = [optionDeleteFail, optionDeleteSucceed]
 attackOptionsKill = [optionKillFail, optionKillSucceed]
 
 def rollChoice():
@@ -76,7 +76,19 @@ while gameRunning == True:
         print(f"There is an issue in '{directory}' ! Navigate to this folder to battle the enemy!")
         print(f"Type 'cd {directory}' to navigate there and start the battle!")
         userInput = str(input("Type directory: "))
+
         if userInput.lower == directory:
             print("You have made it to the directory! You have two options to attack:")
             print("1. Attempt to kill the program")
             print("2. Attempt to delete the program")
+            userInput = str(input("Enter your choice (1/2): "))
+
+            if userInput == "1":
+                random.choice(attackOptionsKill)
+
+            if userInput == "2":
+                random.choice(attackOptionsDelete)
+
+        else:
+            print("You entered the directory wrong!")
+            systemHealth -= 50
