@@ -6,6 +6,6 @@ def one():
 def two():
     print("b")
 
-list = [one, two]
+list; [one, two]
 choose = random.choices(list, weights=(1, 99), k=2)
-                        
+print(choose)
