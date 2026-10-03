@@ -17,6 +17,10 @@ systemHealth = 1000
 enemyHealth = 500
 
 incorrectDirectoryDamage = random.randrange(25, 75)
+optionDeleteSucceedDamage = random.randrange(150, 300)
+optionDeleteFailDamage = random.randrange(75, 150)
+optionKillSucceedDamage = random.randrange(100, 200)
+optionKillFailDamage = random.randrange(100, 200)
 
 ### Create a function to simplify the printing of enemy and player health
 def printHealths():
@@ -52,25 +56,25 @@ def intro():
 ### Options for successfull and unsuccessfull attacks for both delete and kill attacks
 def optionDeleteSucceed():
     global enemyHealth
-    enemyHealth -= 200
+    enemyHealth -= optionDeleteSucceedDamage
     print("You sucessfully removed the malicious program!")
 
 def optionDeleteFail():
     global systemHealth
-    systemHealth -= 100
+    systemHealth -= optionDeleteFailDamage
     print("The program has already rooted itself in other folders. Delete unsuccessfull.")
 
 def optionKillSucceed():
     global enemyHealth
-    enemyHealth -= 150
+    enemyHealth -= optionKillSucceedDamage
     print("You successfully killed the task, resolving the issue!")
 
 def optionKillFail():
     global systemHealth
-    systemHealth -= 150
+    systemHealth -= optionKillFailDamage
     print("The virus has set itself to automatically start on boot! Killing the task does not resolve the issue.")
 
-enemyDirectories = ["cd /home/user/Documents", "cd /home/user/Downloads", "cd /mnt/executor", "cd /tmp", "cd /home/user/.local"]
+enemyDirectories = ["cd /home/user/Documents", "cd /home/user/Downloads", "cd /mnt/executor", "cd /tmp", "cd /home/user/.local", "cd /home/user/.local/share"]
 attackOptionsDelete = [optionDeleteFail, optionDeleteSucceed]
 attackOptionsKill = [optionKillFail, optionKillSucceed]
 
@@ -85,13 +89,17 @@ intro()
 
 while gameRunning == True:
     global playerTurn
+    ### If the game hasn't already been initialized, initialize it.
+    if atTheStart == True:
+        playerTurn()
+        atTheStart = False
 
     def playerTurn():
         global rollChoice, directory, printHealths, attackOptionsKill, attackOptionsDelete, systemHealth, enemyHealth
         rollChoice()
         print(f"There is an issue in '{directory}' ! Navigate to this folder to battle the enemy!")
         print(f"Type '{directory}' to navigate there and start the battle!")
-        userInput = str(input("Type directory: "))
+        userInput = str(input("Type the directory: "))
 
         if userInput == directory:
             print("You have made it to the directory! You have two options to attack:")
@@ -102,20 +110,22 @@ while gameRunning == True:
             if userInput == "1":
                 random.choice(attackOptionsKill)()
                 printHealths()
+                print()
+                playerTurn()
 
             if userInput == "2":
                 random.choice(attackOptionsDelete)()
                 printHealths()
+                print()
+                playerTurn()
 
         else:
             print("You entered the directory wrong!")
             systemHealth -= incorrectDirectoryDamage
             print(f"You lost {incorrectDirectoryDamage} HP!\n")
             printHealths()
-
-    if atTheStart == True:
-        playerTurn()
-        atTheStart = False
+            print()
+            playerTurn()
 
     if systemHealth <= 0:
         print("You lost. Game over.") 
