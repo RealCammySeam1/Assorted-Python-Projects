@@ -26,7 +26,7 @@ optionKillFailDamage = random.randrange(100, 200)
 ### Create a function to simplify the printing of enemy and player health
 def printHealths():
     printSystemHealth = f"System health: {systemHealth}/1000\n"
-    printEnemyHealth = f"Enemy health : {enemyHealth}/500\n\n"
+    printEnemyHealth = f"Enemy health : {enemyHealth}/500\n"
 
     for letter in printSystemHealth:
         print(letter, end='', flush=True)
@@ -118,6 +118,12 @@ def optionKillFail():
         print(letter, end='', flush=True)
         time.sleep(.01)
 
+def userWantContinue():
+    continueTF = str(input("Do you want to continue? (y/n): "))
+    if continueTF == "y":
+        playerTurn()
+        print()
+
 enemyDirectories = ["cd /home/user/Documents", "cd /home/user/Downloads", "cd /mnt/executor", "cd /tmp", "cd /home/user/.local", "cd /home/user/.local/share"]
 attackOptionsDelete = [optionDeleteFail, optionDeleteSucceed]
 attackOptionsKill = [optionKillFail, optionKillSucceed]
@@ -136,7 +142,7 @@ while gameRunning == True:
 
     def playerTurn():
         global rollChoice, directory, printHealths, attackOptionsKill, attackOptionsDelete, systemHealth, enemyHealth
-        rollChoice()
+        rollChoice() ### Choose a random directory from the list
         playerTurnLine1 = f"There is an issue in '{directory}' ! Navigate to this folder to battle the enemy!\n"
         playerTurnLine2 = f"Type '{directory}' to navigate there and start the battle!\n"
 
@@ -172,12 +178,12 @@ while gameRunning == True:
                 random.choice(attackOptionsKill)()
                 printHealths()
                 print()
-                playerTurn()
+                userWantContinue()
             if userInput == "2":
                 random.choice(attackOptionsDelete)()
                 printHealths()
                 print()
-                playerTurn()
+                userWantContinue()
 
         else:
             navigateFailLine1 = "You entered the directory wrong!"
@@ -194,13 +200,14 @@ while gameRunning == True:
 
             printHealths()
             print()
-            playerTurn()
+            userWantContinue()
 
-    ### If the game hasn't already been initialized, initialize it.
+    ### If the main game loop hasn't already been initialized, initialize it.
     if atTheStart == True:
         playerTurn()
         atTheStart = False
 
+    ### End the game and display a game over message if the system health is less than or equal to zero
     if systemHealth <= 0:
         lostLine1 = "You lost. Game over."
 
