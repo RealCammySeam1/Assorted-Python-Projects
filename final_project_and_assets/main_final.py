@@ -1,7 +1,7 @@
 """
 ===============================================
 Assignment [2]
-Student Name: [Cameron]
+Student Name: [Cameron Seamone]
 Date: [17/09/2026]
 
 By typing my name above, I confirm that this is my own work
@@ -9,7 +9,7 @@ and I have not plagiarized or copied code from others or AI sources.
 ===============================================
 """
 
-import random, time
+import random, time, sys
 
 atTheStart = True
 gameRunning = True
@@ -25,6 +25,7 @@ optionKillFailDamage = random.randrange(100, 200)
 
 ### Create a function to simplify the printing of enemy and player health
 def printHealths():
+    print()
     printSystemHealth = f"System health: {systemHealth}/1000\n"
     printEnemyHealth = f"Enemy health : {enemyHealth}/500\n"
 
@@ -117,13 +118,13 @@ def optionKillFail():
         print(letter, end='', flush=True)
         time.sleep(.01)
 
+### Make asking if the user wants to continue a function for simplifictaion
 def userWantContinue():
     continueTF = str(input("Do you want to continue? (y/n): "))
     if continueTF == "y":
         playerTurn()
         print()
 
-didntMakeItDirectories = ["/home/user", "/home/user", "/mnt", "/home", "/var"]
 enemyDirectories = ["cd /home/user/Documents", "cd /home/user/Downloads", "cd /mnt/executor", "cd /tmp", "cd /home/user/.local", "cd /home/user/.local/share", "cd /var/tmp"]
 attackOptionsDelete = [optionDeleteFail, optionDeleteSucceed]
 attackOptionsKill = [optionKillFail, optionKillSucceed]
@@ -142,9 +143,9 @@ intro()
 
 while gameRunning == True:
 
-    def playerTurn():
+    def playerTurn(): ### Make the majority of the game a function so it can be called easily
         global rollChoice, directory, printHealths, attackOptionsKill, attackOptionsDelete, systemHealth, enemyHealth, navigateFailProbability
-        rollChoice() ### Choose a random directory from the list
+        rollChoice() ### Choose a random directory from the list by calling the "rollChoice" function
         playerTurnLine1 = f"There is an issue in '{directory}' ! Navigate to this folder to battle the enemy!\n"
         playerTurnLine2 = f"Type '{directory}' to navigate there and start the battle!\n"
 
@@ -156,47 +157,65 @@ while gameRunning == True:
             print(letter, end='', flush=True)
             time.sleep(.01)
 
-        navigateFail = random.choices(navigateFailProbability)()
+        navigateFail = random.choice(navigateFailProbability)
         if navigateFail == "true":
-            issueDir = random.choices(didntMakeItDirectories)
+            userInput = str(input("Type the directory: "))
+            if userInput == directory:
 
-            failedMessage1 = "You ran into an issue when navigating to the directory!"
-            failedMessage2 = f"The issue is in: {issueDir}"
+                if directory == "cd /home/user/Documents" or "cd /home/user/Downloads" or "cd /home/user/.local":
+                    issueDir = "/home/user"
 
-            for letter in failedMessage1:
-                print(letter, end='', flush=True)
-                time.sleep(.01)
+                if directory == "cd /home/user/.local/share":
+                    issueDir = "/home/user/.local"
 
-            for letter in failedMessage2:
-                print(letter, end='', flush=True)
-                time.sleep(.01)
+                if directory == "cd /mnt/executor":
+                    issueDir = "/mnt"
 
-            navigateFailLine2 = "1. Attempt to kill the program\n"
-            navigateFailLine3 = "2. Attempt to delete the program\n"
+                if directory == "cd /tmp":
+                    issueDir = "/"
 
-            for letter in navigateFailLine1:
-                print(letter, end='', flush=True)
-                time.sleep(.01)
+                if directory == "cd /var/tmp":
+                    issueDir = "/var"
+                
+                failedMessage1 = "You ran into an issue when navigating to the directory!\n"
+                failedMessage2 = f"The issue is in: '{issueDir}'\n"
 
-            for letter in navigateFailLine2:
-                print(letter, end='', flush=True)
-                time.sleep(.01)
+                for letter in failedMessage1:
+                    print(letter, end='', flush=True)
+                    time.sleep(.01)
 
-            for letter in navigateFailLine3:
-                print(letter, end='', flush=True)
-                time.sleep(.01)
+                for letter in failedMessage2:
+                    print(letter, end='', flush=True)
+                    time.sleep(.01)
 
-            userInput = str(input("Enter your choice (1/2): "))
-            if userInput == "1":
-                random.choice(attackOptionsKill)()
-                printHealths()
-                print()
-                userWantContinue()
-            if userInput == "2":
-                random.choice(attackOptionsDelete)()
-                printHealths()
-                print()
-                userWantContinue()
+                navigateFailLine1 = "1. Attempt to kill the program\n"
+                navigateFailLine2 = "2. Attempt to delete the program\n"
+
+                for letter in navigateFailLine1:
+                    print(letter, end='', flush=True)
+                    time.sleep(.01)
+
+                for letter in navigateFailLine2:
+                    print(letter, end='', flush=True)
+                    time.sleep(.01)
+
+                userInput1 = str(input("Enter your choice (1/2): "))
+
+                if userInput1 == "1":
+                    random.choice(attackOptionsKill)()
+                    printHealths()
+                    print()
+                    userWantContinue()
+
+                if userInput1 == "2":
+                    random.choice(attackOptionsDelete)()
+                    printHealths()
+                    print()
+                    userWantContinue()
+
+                else:
+                    print("INVALID INPUT!")
+                    sys.exit()
 
         if navigateFail == "false":
         
@@ -225,11 +244,16 @@ while gameRunning == True:
                     printHealths()
                     print()
                     userWantContinue()
+
                 if userInput == "2":
                     random.choice(attackOptionsDelete)()
                     printHealths()
                     print()
                     userWantContinue()
+
+                else:
+                    print("INVALID INPUT!")
+                    sys.exit()
 
             else:
                 navigateFailLine1 = "You entered the directory wrong!"
