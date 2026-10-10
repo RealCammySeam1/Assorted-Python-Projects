@@ -23,11 +23,17 @@ optionDeleteFailDamage = random.randrange(75, 150)
 optionKillSucceedDamage = random.randrange(100, 200)
 optionKillFailDamage = random.randrange(100, 200)
 
+### Set colours to be used later
+RED = '\033[31m'
+GREEN = '\033[32m'
+YELLOW = '\033[33m'
+RESET= '\033[0m'
+
 ### Create a function to simplify the printing of enemy and player health
 def printHealths():
     print()
-    printSystemHealth = f"System health: {systemHealth}/1000\n"
-    printEnemyHealth = f"Enemy health : {enemyHealth}/500\n"
+    printSystemHealth = f"{GREEN}System health: {systemHealth}/1000{RESET}\n"
+    printEnemyHealth = f"{RED}Enemy health : {enemyHealth}/500{RESET}\n"
 
     for letter in printSystemHealth:
         print(letter, end='', flush=True)
@@ -39,6 +45,7 @@ def printHealths():
 
 ### Make the introduction art a function for simplicity (made with artificial intelligence)
 def introArt():
+    print(RED)
     print("████████╗██╗  ██╗███████╗    ███████╗ ██████╗  █████╗ ███╗   ██╗██████╗")
     print("╚══██╔══╝██║  ██║██╔════╝    ██╔════╝ ██╔══██╗██╔══██╗████╗  ██║██╔══██╗")
     print("   ██║   ███████║█████╗      ██║  ███╗██████╔╝███████║██╔██╗ ██║██║  ██║")
@@ -46,12 +53,13 @@ def introArt():
     print("   ██║   ██║  ██║███████╗    ╚██████╔╝██║  ██║██║  ██║██║ ╚████║██████╔╝")
     print("   ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝")
     print("")
-    print("████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗")
-    print("╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║")
-    print("   ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║██║")
-    print("   ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║")
-    print("   ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗")
-    print("   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝")
+    print("  -  ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗")
+    print("    ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║")
+    print("       ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║██║")
+    print("       ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║")
+    print("       ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗")
+    print("       ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝")
+    print(RESET)
 
 ### Make the introduction a function for simplicity
 def intro():
@@ -85,7 +93,7 @@ def intro():
 def optionDeleteSucceed():
     global enemyHealth
     enemyHealth -= optionDeleteSucceedDamage
-    optionDeleteSucceedLine1 = "You sucessfully removed the malicious program!\n"
+    optionDeleteSucceedLine1 = "{GREEN}You sucessfully removed the malicious program!{RESET}\n"
 
     for letter in optionDeleteSucceedLine1:
         print(letter, end='', flush=True)
@@ -94,7 +102,7 @@ def optionDeleteSucceed():
 def optionDeleteFail():
     global systemHealth
     systemHealth -= optionDeleteFailDamage
-    optionDeleteFailLine1 = "The program has already rooted itself in other folders. Delete unsuccessfull.\n"
+    optionDeleteFailLine1 = "{RED}The program has already rooted itself in other folders. Delete unsuccessfull.{RESET}\n"
 
     for letter in optionDeleteFailLine1:
         print(letter, end='', flush=True)
@@ -103,7 +111,7 @@ def optionDeleteFail():
 def optionKillSucceed():
     global enemyHealth
     enemyHealth -= optionKillSucceedDamage
-    optionKillSucceedLine1 ="You successfully killed the task, resolving the issue!\n"
+    optionKillSucceedLine1 ="{GREEN}You successfully killed the task, resolving the issue!{RESET}\n"
 
     for letter in optionKillSucceedLine1:
         print(letter, end='', flush=True)
@@ -112,7 +120,7 @@ def optionKillSucceed():
 def optionKillFail():
     global systemHealth
     systemHealth -= optionKillFailDamage
-    optionKillFailLine1 = "The virus has set itself to automatically start on boot! Killing the task does not resolve the issue.\n"
+    optionKillFailLine1 = "{RED}The virus has set itself to automatically start on boot! Killing the task does not resolve the issue.{RESET}\n"
 
     for letter in optionKillFailLine1:
         print(letter, end='', flush=True)
@@ -135,9 +143,21 @@ def rollChoice():
     global directory
     directory = random.choice(enemyDirectories)
 
+def loading():
+    print("|", end='\r')
+    time.sleep(0.5)
+    print("/", end='\r')
+    time.sleep(0.5)
+    print("-", end='\r')
+    time.sleep(0.5)
+    print("\\", end='\r')
+    time.sleep(0.5)
+    print("|", end='\r')
+    time.sleep(0.5)
+
 navigateFailProbability = ["true", "true", "true", "false"]
 
-### Call the intro functions to start the game
+### Call the intro functions to start the game, so it can be called at any time
 introArt()
 intro()
 
@@ -146,8 +166,8 @@ while gameRunning == True:
     def playerTurn(): ### Make the majority of the game a function so it can be called easily
         global rollChoice, directory, printHealths, attackOptionsKill, attackOptionsDelete, systemHealth, enemyHealth, navigateFailProbability
         rollChoice() ### Choose a random directory from the list by calling the "rollChoice" function
-        playerTurnLine1 = f"There is an issue in '{directory}' ! Navigate to this folder to battle the enemy!\n"
-        playerTurnLine2 = f"Type '{directory}' to navigate there and start the battle!\n"
+        playerTurnLine1 = f"There is an issue in '{YELLOW}{directory[3:]}{RESET}' ! Navigate to this folder to battle the enemy!\n" ### Print the directory minus the first three characters, so it only prints the directory name
+        playerTurnLine2 = f"Type {YELLOW}'{directory}'{RESET} to navigate there and start the battle!\n"
 
         for letter in playerTurnLine1:
             print(letter, end='', flush=True)
@@ -157,11 +177,15 @@ while gameRunning == True:
             print(letter, end='', flush=True)
             time.sleep(.01)
 
-        navigateFail = random.choice(navigateFailProbability)
+        navigateFail = random.choice(navigateFailProbability) ### Choose whether or not the game fails to navigate to the directory
+
         if navigateFail == "true":
-            userInput = str(input("Type the directory: "))
+
+            userInput = str(input("Type the command: "))
+
             if userInput == directory:
 
+                ### Base the directory where the error occured on which directory the user was trying to navigate to
                 if directory == "cd /home/user/Documents" or "cd /home/user/Downloads" or "cd /home/user/.local":
                     issueDir = "/home/user"
 
@@ -176,9 +200,13 @@ while gameRunning == True:
 
                 if directory == "cd /var/tmp":
                     issueDir = "/var"
-                
+
+                loading()
+
+                print("ERROR!\n")
+
                 failedMessage1 = "You ran into an issue when navigating to the directory!\n"
-                failedMessage2 = f"The issue is in: '{issueDir}'\n"
+                failedMessage2 = f"The issue is in: {YELLOW}'{issueDir}'{RESET}\n"
 
                 for letter in failedMessage1:
                     print(letter, end='', flush=True)
@@ -218,8 +246,10 @@ while gameRunning == True:
                     sys.exit()
 
         if navigateFail == "false":
-        
-            userInput = str(input("Type the directory: "))
+
+            userInput = str(input("Type the command: "))
+
+            loading()
 
             if userInput == directory:
                 navigateSuccessLine1 ="You have made it to the directory! You have two options to attack:\n"
@@ -252,7 +282,7 @@ while gameRunning == True:
                     userWantContinue()
 
                 else:
-                    print("INVALID INPUT!")
+                    print("{RED}INVALID INPUT!{RESET}")
                     sys.exit()
 
             else:
